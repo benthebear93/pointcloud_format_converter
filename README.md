@@ -6,7 +6,7 @@ This coverter based on **open3d**. If you're using old ROS1 i suggest to use con
 
 ## Todo list
 - [x] pcd->ply
-- [ ] Multiple files select
+- [x] Multiple files select
 
 UI for converting various point cloud file formats
 (currently pcd -> ply)
