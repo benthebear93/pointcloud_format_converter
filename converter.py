@@ -17,28 +17,31 @@ class MainWindow(QDialog):
 
     def browsefiles(self):
         self.currt_root = os.getcwd()
-        self.fname = QFileDialog.getOpenFileName(self, 'Open file', '', 'Pointcloud files (*.pcd *.ply)')
-        self.filename.setText(self.fname[0])
+        self.fname = QFileDialog.getOpenFileNames(self, 'Open file', '', 'Pointcloud files (*.pcd *.ply)')
+        self.filename.setText(self.fname[0][0])
 
     def pcd_to_ply(self):
         select_flag = False
         try:
-            pc_filename = self.fname[0].split('/')[-1][:-4]
-            pc_file_dir = self.fname[0][:-(len(pc_filename)+4)]
+            num_of_select_file = len(self.fname[0])
+            print("select ", num_of_select_file, " files")
             select_flag = True
         except:
             print('Select the file first')
 
         if select_flag == True:
+            for i in range(num_of_select_file):
+                pc_filename = self.fname[0][i].split('/')[-1][:-4]
+                pc_file_dir = self.fname[0][i][:-(len(pc_filename)+4)]
             # without open3d"
                 #os.chdir(pc_file_dir)
                 #commad = 'pcl_pcd2ply -format 0 input ' + pc_filename + ".pcd " + pc_filename +".ply"
                 # os.system(commad)
-            print("converting...")
-            pcd = o3d.io.read_point_cloud(self.fname[0])
-            print(pcd)
-            o3d.io.write_point_cloud(pc_file_dir+pc_filename+".ply", pcd)
-            print("convert done")
+                print("converting...")
+                pcd = o3d.io.read_point_cloud(self.fname[0][i])
+                print(pcd)
+                o3d.io.write_point_cloud(pc_file_dir+pc_filename+".ply", pcd)
+                print("convert done")
 
 
 app=QApplication(sys.argv)
