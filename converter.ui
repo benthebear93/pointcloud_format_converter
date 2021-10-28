@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>format converter</string>
    </property>
    <widget class="QLineEdit" name="filename">
     <property name="geometry">
